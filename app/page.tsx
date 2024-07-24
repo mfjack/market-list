@@ -9,7 +9,7 @@ import { useRef, useState } from "react";
 
 const Home = () => {
    const inputRef = useRef<HTMLInputElement>(null);
-   const [products, setProducts] = useState([]);
+   const [products, setProducts] = useState<string[]>([]);
 
    const handleAddProduct = () => {
       if (inputRef.current) {
@@ -37,10 +37,8 @@ const Home = () => {
          {products.length > 0 ? (
             <div className="w-full flex flex-col gap-3 items-center">
                {products.map((product, index) => (
-                  <div className="border rounded-md p-2 text-lg shadow-md w-full flex justify-between lg:w-1/2">
-                     <li className="list-none" key={index}>
-                        {product}
-                     </li>
+                  <div className="border rounded-md p-2 text-lg shadow-md w-full flex justify-between lg:w-1/2" key={index}>
+                     <li className="list-none">{product}</li>
                      <button onClick={() => handleDeleteProduct(index)}>
                         <RiDeleteBinLine size={22} />
                      </button>
