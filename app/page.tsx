@@ -2,14 +2,12 @@
 
 import { MdOutlineAddShoppingCart } from "react-icons/md";
 import { RiDeleteBinLine } from "react-icons/ri";
-import { useRef, useState } from "react";
-
-// useRef
-// useState
+import { useRef, useState, useEffect } from "react";
 
 const Home = () => {
    const inputRef = useRef<HTMLInputElement>(null);
    const [products, setProducts] = useState<string[]>([]);
+   const [loading, setLoading] = useState(false);
 
    const handleAddProduct = () => {
       if (inputRef.current) {
@@ -34,7 +32,9 @@ const Home = () => {
             </button>
          </div>
 
-         {products.length > 0 ? (
+         {!loading ? (
+            <div className="mt-5 w-full flex justify-center lg:w-1/2 opacity-70">Carregando...</div>
+         ) : products.length > 0 ? (
             <div className="w-full flex flex-col gap-3 items-center">
                {products.map((product, index) => (
                   <div className="border rounded-md p-2 text-lg shadow-md w-full flex justify-between lg:w-1/2" key={index}>
