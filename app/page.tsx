@@ -9,6 +9,22 @@ const Home = () => {
    const [products, setProducts] = useState<string[]>([]);
    const [loading, setLoading] = useState(false);
 
+   // Carrega produtos do localStorage após a montagem do componente
+   useEffect(() => {
+      const storedProducts = localStorage.getItem("products");
+      if (storedProducts) {
+         setProducts(JSON.parse(storedProducts));
+      }
+      setLoading(true);
+   }, []);
+
+   // Salve produtos no localStorage sempre que eles mudarem
+   useEffect(() => {
+      if (products.length > 0) {
+         localStorage.setItem("products", JSON.stringify(products));
+      }
+   }, [products]);
+
    const handleAddProduct = () => {
       if (inputRef.current) {
          setProducts([inputRef.current.value, ...products]);
